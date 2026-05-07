@@ -110,7 +110,7 @@ function App() {
 
         <AnimatePresence>
           {user && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
@@ -148,14 +148,14 @@ function App() {
 
         <AnimatePresence>
           {repos.length > 0 && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className='mt-6 w-full max-w-md'
             >
               {repos.map((repo, index) => (
-                <motion.div 
+                <motion.div
                   key={repo.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -164,34 +164,30 @@ function App() {
                   className='bg-gray-800 p-4 rounded-lg mb-3 cursor-default border border-gray-700/50 shadow-lg'
                 >
 
-                <a href={repo.html_url} target='_blank' rel='noreferrer'
-                  className='text-blue-300 font-semibold hover:underline'>
-                  {repo.name}
-                </a>
-                <p className='text-gray-400 text-sm mt-1'>{repo.description}</p>
-                <div className='flex items-center gap-3 mt-2'>
+                  <a href={repo.html_url} target='_blank' rel='noreferrer'
+                    className='text-blue-300 font-semibold hover:underline'>
+                    {repo.name}
+                  </a>
+                  <p className='text-gray-400 text-sm mt-1'>{repo.description}</p>
+                  <div className='flex items-center gap-3 mt-2'>
 
-                  {repo.language && (
-                    <span className='flex items-center gap-1 text-sm text-gray-300'>
-                      <span
-                        style={{ backgroundColor: LANG_COLORS[repo.language] || '#8b949e' }}
-                        className='w-3 h-3 rounded-full inline-block'
-                      />
-                      {repo.language}
-                    </span>
-                  )}
-                </div>
+                    {repo.language && (
+                      <span className='flex items-center gap-1 text-sm text-gray-300'>
+                        <span
+                          style={{ backgroundColor: LANG_COLORS[repo.language] || '#8b949e' }}
+                          className='w-3 h-3 rounded-full inline-block'
+                        />
+                        {repo.language}
+                      </span>
+                    )}
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
           )}
         </AnimatePresence>
 
-
-
       </div>
-
-
 
 
     </>
