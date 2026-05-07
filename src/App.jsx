@@ -84,7 +84,7 @@ function App() {
     <>
       <div className='min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center px-4'>
 
-        <h1 className='text-3xl font-bold mb-6'>Github viewer</h1>
+        <h1 className='text-3xl font-bold mb-6'>Github Repo Viewer</h1>
 
         <div className='flex gap-2'>
           <input type="text"
