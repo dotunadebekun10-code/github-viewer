@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import './App.css'
+
 
 const LANG_COLORS = {
   JavaScript: '#f1e05a',
@@ -106,40 +108,62 @@ function App() {
           <p className='text-red-400 mt-4'>{error}</p>
         )}
 
-        {user && (
-          <div className='mt-8 bg-gray-800 p-6 rounded-lg shadow-md text-center w-80'>
-            <img src={user.avatar_url}
-              alt={user.name || user.login}
-              className='w-24 h-24 rounded-full mx-auto mb-2 border-1 border-gray-400'
-            />
-            <h2 className='text-xl font-semibold'>
-              {user.name || user.login}
-            </h2>
-            <a
-              href={user.html_url}
-              target='_blank'
-              rel='noreferrer'
-              className='text-blue-400 text-sm hover:underline'
+        <AnimatePresence>
+          {user && (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className='mt-8 bg-gray-800 p-6 rounded-lg shadow-md text-center w-80 border border-gray-700'
             >
-              @{user.login}
-            </a>
-            <p className='text-gray-400 text-sm mt-2'>{user.bio}</p>
-            <div className='flex justify-between mt-4 text-sm'>
-              <span>Followers: {user.followers}</span>
-              <span>Following: {user.following}</span>
-              <span>Public Repos: {user.public_repos}</span>
-            </div>
-          </div>
-        )}
+              <img src={user.avatar_url}
+                alt={user.name || user.login}
+                className='w-24 h-24 rounded-full mx-auto mb-2 border-1 border-gray-400'
+              />
+              <h2 className='text-xl font-semibold'>
+                {user.name || user.login}
+              </h2>
+              <a
+                href={user.html_url}
+                target='_blank'
+                rel='noreferrer'
+                className='text-blue-400 text-sm hover:underline'
+              >
+                @{user.login}
+              </a>
+              <p className='text-gray-400 text-sm mt-2'>{user.bio}</p>
+              <div className='flex justify-between mt-4 text-sm'>
+                <span>Followers: {user.followers}</span>
+                <span>Following: {user.following}</span>
+                <span>Public Repos: {user.public_repos}</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
 
         {user && repos.length === 0 && !loading && (
           <p className='text-gray-500 text-sm mt-6'>No public repositories found.</p>
         )}
 
-        {repos.length > 0 && (
-          <div className='mt-6 w-full max-w-md'>
-            {repos.map(repo => (
-              <div key={repo.id} className='bg-gray-800 p-4 rounded-lg mb-3'>
+        <AnimatePresence>
+          {repos.length > 0 && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className='mt-6 w-full max-w-md'
+            >
+              {repos.map((repo, index) => (
+                <motion.div 
+                  key={repo.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02, backgroundColor: '#1f2937' }}
+                  className='bg-gray-800 p-4 rounded-lg mb-3 cursor-default border border-gray-700/50 shadow-lg'
+                >
+
                 <a href={repo.html_url} target='_blank' rel='noreferrer'
                   className='text-blue-300 font-semibold hover:underline'>
                   {repo.name}
@@ -157,10 +181,12 @@ function App() {
                     </span>
                   )}
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
 
 
       </div>
